@@ -1,8 +1,8 @@
 spring:
   # 配置druid
   datasource:
-    username: root
-    password: 123456
+    username: 
+    password: 
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/miaosha?characterEncoding=utf-8&useSSL=false
     initialSize: 5
@@ -23,14 +23,14 @@ spring:
 
   # 配置rabbitmq
   rabbitmq:
-    host: 192.168.56.100
+    host: 
     port: 5672
     username: guest
     password: guest
 
   # 配置redis
   redis:
-    host: 192.168.56.100     # Redis服务器地址
+    host:      # Redis服务器地址
     port: 6379            # Redis服务器端口
     password:             # Redis服务器连接密码（默认为空）
     database: 0           # Redis数据库索引（默认为0）

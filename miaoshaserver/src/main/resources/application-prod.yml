@@ -1,10 +1,10 @@
 spring:
   # 配置druid
   datasource:
-    username: root
-    password: root
+    username: 
+    password: 
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://119.23.69.2:3306/miaosha?characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://:3306/miaosha?characterEncoding=utf-8&useSSL=false
     initialSize: 5
     minIdle: 5
     maxActive: 20
@@ -23,7 +23,7 @@ spring:
 
   # 配置redis
   redis:
-    host: 119.23.69.2     # Redis服务器地址
+    host:      # Redis服务器地址
     port: 6379            # Redis服务器端口
     password:             # Redis服务器连接密码（默认为空）
     database: 0           # Redis数据库索引（默认为0）
