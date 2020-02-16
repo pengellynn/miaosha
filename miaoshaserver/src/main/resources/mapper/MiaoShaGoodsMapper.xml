@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ripon.miaoshaserver.dao.MiaoShaGoodsMapper">
+  <resultMap id="BaseResultMap" type="com.ripon.miaoshaserver.domain.MiaoShaGoods">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="miaosha_stock" jdbcType="INTEGER" property="miaoshaStock" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="miaosha_price" jdbcType="DECIMAL" property="miaoshaPrice" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, goods_id, miaosha_stock, start_time, end_time, miaosha_price
+  </sql>
+  <select id="selectByExample" parameterType="com.ripon.miaoshaserver.domain.MiaoShaGoodsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from miaosha_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from miaosha_goods
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from miaosha_goods
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ripon.miaoshaserver.domain.MiaoShaGoodsExample">
+    delete from miaosha_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ripon.miaoshaserver.domain.MiaoShaGoods">
+    insert into miaosha_goods (id, goods_id, miaosha_stock, 
+      start_time, end_time, miaosha_price
+      )
+    values (#{id,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, #{miaoshaStock,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{miaoshaPrice,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ripon.miaoshaserver.domain.MiaoShaGoods">
+    insert into miaosha_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="miaoshaStock != null">
+        miaosha_stock,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="miaoshaPrice != null">
+        miaosha_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="miaoshaStock != null">
+        #{miaoshaStock,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="miaoshaPrice != null">
+        #{miaoshaPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ripon.miaoshaserver.domain.MiaoShaGoodsExample" resultType="java.lang.Long">
+    select count(*) from miaosha_goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update miaosha_goods
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodsId != null">
+        goods_id = #{record.goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.miaoshaStock != null">
+        miaosha_stock = #{record.miaoshaStock,jdbcType=INTEGER},
+      </if>
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.miaoshaPrice != null">
+        miaosha_price = #{record.miaoshaPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update miaosha_goods
+    set id = #{record.id,jdbcType=BIGINT},
+      goods_id = #{record.goodsId,jdbcType=BIGINT},
+      miaosha_stock = #{record.miaoshaStock,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      miaosha_price = #{record.miaoshaPrice,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ripon.miaoshaserver.domain.MiaoShaGoods">
+    update miaosha_goods
+    <set>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="miaoshaStock != null">
+        miaosha_stock = #{miaoshaStock,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="miaoshaPrice != null">
+        miaosha_price = #{miaoshaPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ripon.miaoshaserver.domain.MiaoShaGoods">
+    update miaosha_goods
+    set goods_id = #{goodsId,jdbcType=BIGINT},
+      miaosha_stock = #{miaoshaStock,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      miaosha_price = #{miaoshaPrice,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="goodsDTO" type="com.ripon.miaoshaserver.dto.GoodsDTO">
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="title" property="title"/>
+    <result column="detail" property="detail"/>
+    <result column="price" property="price"/>
+    <result column="stock" property="stock"/>
+    <result column="image" property="image"/>
+    <result column="miaosha_stock" property="miaoshaStock"/>
+    <result column="miaosha_price" property="miaoshaPrice"/>
+    <result column="start_time" property="startTime"/>
+    <result column="end_time" property="endTime"/>
+  </resultMap>
+  <select id="selectGoodsDTOByPrimaryKey" parameterType="java.lang.Long" resultMap="goodsDTO">
+    select g.id, g.name, g.title, g.detail, g.stock, g.price, g.image,
+           msg.miaosha_stock, msg.miaosha_price, msg.start_time, msg.end_time
+    from goods g
+    left join miaosha_goods msg
+    on g.id = msg.goods_id
+    where g.id = #{id}
+  </select>
+  <select id="selectAllMiaoshaGoods" resultMap="goodsDTO">
+    select g.id, g.name, g.title, g.detail, g.stock, g.price, g.image,
+           msg.miaosha_stock, msg.miaosha_price, msg.start_time, msg.end_time
+    from goods g
+    left join miaosha_goods msg
+    on g.id = msg.goods_id
+  </select>
+  <update id="reduceStock" parameterType="java.lang.Long">
+    update miaosha_goods
+    set miaosha_stock = miaosha_stock - 1
+    where goods_id = #{id} and miaosha_stock > 0
+  </update>
+</mapper>
